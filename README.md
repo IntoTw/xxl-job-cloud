@@ -1,2 +1,2 @@
-# xxl-job-cloud
-xxl-job for spring-cloud version
+## xxl-job spring cloud version
+use eureka instead of original http registry way.

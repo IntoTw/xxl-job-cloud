@@ -1,5 +1,6 @@
 package com.xxl.job.admin.core.trigger;
 
+import com.xxl.job.admin.cloud.SpringAdminContext;
 import com.xxl.job.admin.core.conf.XxlJobAdminConfig;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobInfo;
@@ -10,7 +11,6 @@ import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.biz.model.TriggerParam;
-import com.xxl.job.core.cloud.SpringContext;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.util.IpUtil;
 import com.xxl.job.core.util.ThrowableUtil;
@@ -59,7 +59,7 @@ public class XxlJobTrigger {
 
         XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao().load(jobInfo.getJobGroup());
         if (group.getAddressType() == 0) {
-            group.setAddressList(SpringContext.getEurekaAddressList(group.getAppname()));
+            group.setAddressList(SpringAdminContext.getEurekaAddressList(group.getAppname()));
         }
 
         // cover addressList

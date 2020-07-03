@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 /**
  * @author xuxueli 2018-10-28 00:38:13
  */
-@SpringBootApplication(scanBasePackages = {"com.xxl.job.core.cloud"})
+@SpringBootApplication
 @EnableEurekaClient
 public class XxlJobAdminApplication {
 

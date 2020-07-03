@@ -1,4 +1,4 @@
-package com.xxl.job.core.cloud;
+package com.xxl.job.admin.cloud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -17,21 +17,21 @@ import java.util.List;
  * @package: com.xxl.job.admin.core.cloud
  * @date: 2020年07月02日 14时01分
  */
-@Component("springContext")
-public class SpringContext {
+@Component("springAdminContext")
+public class SpringAdminContext {
     @Autowired
     DiscoveryClient discoveryClient;
 
-    private static SpringContext springContext;
+    private static SpringAdminContext springAdminContext;
     @PostConstruct
     public void initialize() {
-        springContext= this;
-        springContext.discoveryClient=this.discoveryClient;
+        springAdminContext = this;
+        springAdminContext.discoveryClient=this.discoveryClient;
     }
     public static String getEurekaAddressList(String appName){
         //may be springContext not init
-        if(springContext!=null){
-            DiscoveryClient discoveryClient = SpringContext.springContext.discoveryClient;
+        if(springAdminContext !=null){
+            DiscoveryClient discoveryClient = SpringAdminContext.springAdminContext.discoveryClient;
             List<ServiceInstance> instances = discoveryClient.getInstances(appName);
             StringBuilder addressBuilder = new StringBuilder();
             for (int i = 0; i < instances.size(); i++) {

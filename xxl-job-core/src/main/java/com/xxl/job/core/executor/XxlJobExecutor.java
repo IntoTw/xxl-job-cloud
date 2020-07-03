@@ -89,7 +89,7 @@ public class XxlJobExecutor  {
         String adminAppName="xxl-job-admin-cloud";
         List<String> addressList = Arrays.asList(SpringContext.getEurekaAddressList(adminAppName).split(","));
         addressList.forEach(e ->{
-            adminBizs.add(new AdminBizClient(e,accessToken));
+            adminBizs.add(new AdminBizClient(e.concat("/").concat("xxl-job-admin"),accessToken));
         });
         return adminBizs;
     }

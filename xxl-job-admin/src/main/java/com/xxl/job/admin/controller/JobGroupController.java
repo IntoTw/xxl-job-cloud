@@ -1,5 +1,6 @@
 package com.xxl.job.admin.controller;
 
+import com.xxl.job.admin.cloud.SpringAdminContext;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobRegistry;
 import com.xxl.job.admin.core.util.I18nUtil;
@@ -47,6 +48,11 @@ public class JobGroupController {
 
 		// page query
 		List<XxlJobGroup> list = xxlJobGroupDao.pageList(start, length, appname, title);
+		list.forEach(e->{
+			if(e.getAddressType()==0){
+				e.setAddressList(SpringAdminContext.getEurekaAddressList(e.getAppname()));
+			}
+		});
 		int list_count = xxlJobGroupDao.pageListCount(start, length, appname, title);
 
 		// package result
@@ -175,6 +181,10 @@ public class JobGroupController {
 	@ResponseBody
 	public ReturnT<XxlJobGroup> loadById(int id){
 		XxlJobGroup jobGroup = xxlJobGroupDao.load(id);
+		//自动注册改为从eureka获取在线列表
+		if(jobGroup.getAddressType()==0){
+			jobGroup.setAddressList(SpringAdminContext.getEurekaAddressList(jobGroup.getAppname()));
+		}
 		return jobGroup!=null?new ReturnT<XxlJobGroup>(jobGroup):new ReturnT<XxlJobGroup>(ReturnT.FAIL_CODE, null);
 	}
 

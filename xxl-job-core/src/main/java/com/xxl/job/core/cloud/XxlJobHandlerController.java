@@ -6,7 +6,6 @@ import com.xxl.job.core.biz.model.*;
 import com.xxl.job.core.util.GsonTool;
 import com.xxl.job.core.util.ThrowableUtil;
 import com.xxl.job.core.util.XxlJobRemotingUtil;
-import groovy.util.logging.Slf4j;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
@@ -33,28 +32,25 @@ import java.util.concurrent.*;
  * @author xuxueli 2020-04-11 21:25
  */
 @Controller
-@Slf4j
 public class XxlJobHandlerController {
-    @PostMapping("/job/{method}")
-    @ResponseBody
-    public ReturnT jobHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("method") String methodName) {
-        return doHandlerReq(httpServletRequest,httpServletResponse,methodName);
-    }
     private static final Logger logger = LoggerFactory.getLogger(XxlJobHandlerController.class);
+
     private ExecutorBiz executorBiz;
-    @Value("${xxl.job.accessToken:''}")
+    @Value("${xxl.job.accessToken:}")
     private String accessToken;
     @Autowired
     ThreadPoolExecutor bizThreadPool;
-
     @PostConstruct
-    public void start(final String address, final int port, final String appname, final String accessToken) {
+    public void start() {
         executorBiz = new ExecutorBizImpl();
     }
 
-
+    @PostMapping("/job/{method}")
+    @ResponseBody
+    public ReturnT jobHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("method") String methodName) {
+        return doHandlerReq(httpServletRequest,httpServletResponse,"/"+methodName);
+    }
     // ---------------------- registry ----------------------
-
 
     protected ReturnT doHandlerReq(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,String method) {
         try {

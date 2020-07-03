@@ -85,7 +85,7 @@ public class XxlJobScheduler  {
         }
 
         // load-cache
-        address = address.trim();
+        address = address.trim().concat("/job");
         ExecutorBiz executorBiz = executorBizRepository.get(address);
         if (executorBiz != null) {
             return executorBiz;

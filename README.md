@@ -16,12 +16,11 @@ mvn install;
 ```
 ##### 3. add package scan to 'com.xxl.job.core.cloud' to enable configure.
 ```java
-@EnableFeignClients(basePackages = "cn.intotw.rdcj.*.api")
+@EnableFeignClients
 @EnableEurekaClient
 //like this
 @SpringBootApplication(exclude = JacksonAutoConfiguration.class,
-        scanBasePackages = {"cn.intotw.rdcj","com.xxl.job.core.cloud"})
-@MapperScan("cn.intotw.rdcj.*.dao")
+        scanBasePackages = {"com.xxl.job.core.cloud"})
 @EnableHystrix
 public class RdcjUserApplication {
     public static void main(String[] args) {

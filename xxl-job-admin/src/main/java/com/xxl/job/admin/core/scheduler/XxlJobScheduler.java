@@ -85,6 +85,7 @@ public class XxlJobScheduler  {
         }
 
         // load-cache
+        //@edit 增加请求前缀，防止目标controller直接使用/的话会冲突
         address = address.trim().concat("/job");
         ExecutorBiz executorBiz = executorBizRepository.get(address);
         if (executorBiz != null) {

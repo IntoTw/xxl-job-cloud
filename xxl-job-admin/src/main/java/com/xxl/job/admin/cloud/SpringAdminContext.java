@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Created by Chenxiang
- *
+ * @edit
  * @generator: IntelliJ IDEA
  * @description:
  * @project: xxl-job-cloud

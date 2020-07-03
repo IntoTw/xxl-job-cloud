@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Chenxiang
- *
+ * @edit: 原有是new的线程池，执行器的任务都在线程池中执行，这边修改为spring管理的单例，其他参数没改
  * @generator: IntelliJ IDEA
  * @description:
  * @project: xxl-job-cloud

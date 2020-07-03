@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Created by Chenxiang
- *
+ * @edit 静态中能获取到列表
  * @generator: IntelliJ IDEA
  * @description:
  * @project: xxl-job-cloud

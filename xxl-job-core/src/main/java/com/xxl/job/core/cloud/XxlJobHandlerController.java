@@ -28,7 +28,7 @@ import java.util.concurrent.*;
 
 /**
  * Copy from : https://github.com/xuxueli/xxl-rpc
- *
+ * @edit 代替原有的触发，原有是embedServer，这里使用springmvc的方式触发
  * @author xuxueli 2020-04-11 21:25
  */
 @Controller
@@ -55,12 +55,14 @@ public class XxlJobHandlerController {
     protected ReturnT doHandlerReq(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,String method) {
         try {
             //read request
+            //@edit 这里请求都模拟的原有处理方式，包括header这些
             int contentLength = httpServletRequest.getContentLength();
             byte[] reqBody=new byte[contentLength];
             httpServletRequest.getInputStream().read(reqBody,0,contentLength);
             String requestData=new String(reqBody, StandardCharsets.UTF_8);
             String uri = method;
             String accessTokenReq = httpServletRequest.getHeader(XxlJobRemotingUtil.XXL_JOB_ACCESS_TOKEN);
+            //@edit 这里原有是netty纯异步，但是到这边http就不太合适了，这么写虽然看起来吞吐会下降，但是一般web容器现在底层也支持nio了，应该关系不大。
             FutureTask<ReturnT> stringFutureTask=new FutureTask<ReturnT>(() -> process(uri, requestData, accessTokenReq));
             // invoke
             bizThreadPool.execute(stringFutureTask);

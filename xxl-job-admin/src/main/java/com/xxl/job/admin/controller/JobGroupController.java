@@ -47,6 +47,7 @@ public class JobGroupController {
 										String appname, String title) {
 
 		// page query
+		//@edit
 		List<XxlJobGroup> list = xxlJobGroupDao.pageList(start, length, appname, title);
 		list.forEach(e->{
 			if(e.getAddressType()==0){
@@ -182,6 +183,7 @@ public class JobGroupController {
 	public ReturnT<XxlJobGroup> loadById(int id){
 		XxlJobGroup jobGroup = xxlJobGroupDao.load(id);
 		//自动注册改为从eureka获取在线列表
+		//@edit
 		if(jobGroup.getAddressType()==0){
 			jobGroup.setAddressList(SpringAdminContext.getEurekaAddressList(jobGroup.getAppname()));
 		}

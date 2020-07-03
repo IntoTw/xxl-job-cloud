@@ -83,7 +83,10 @@ public class XxlJobExecutor  {
 
 
     // ---------------------- admin-client (rpc invoker) ----------------------
-
+    //@edit 这个方法主要用于执行器在获取调度中心列表时调用，目的是执行器获取调度中心列表进行callback回调通知执行结果。
+    //如果callback失败或者这里出问题，那么会导致在管理台看到的执行结果永远没有。
+    //管理台的调度结果和执行结果是分开的，调度结果依赖单次http请求，执行结果依赖callback
+    // @see TriggerCallbackThread
     public static List<AdminBiz> getAdminBizList(){
         List<AdminBiz> adminBizs=new ArrayList<>();
         String adminAppName="xxl-job-admin-cloud";

@@ -58,6 +58,7 @@ public class XxlJobTrigger {
         int finalFailRetryCount = failRetryCount >= 0 ? failRetryCount : jobInfo.getExecutorFailRetryCount();
 
         XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao().load(jobInfo.getJobGroup());
+        //@edit
         if (group.getAddressType() == 0) {
             group.setAddressList(SpringAdminContext.getEurekaAddressList(group.getAppname()));
         }

@@ -29,6 +29,6 @@ public class RdcjUserApplication {
     }
 }
 ```
-##### 4. and run xxl-job-admin from this project(do not fogot edit your eureka config).
+##### 4. and run xxl-job-admin from this project(do not forgot edit your eureka config).
 
 ##### 5. use it like original.
